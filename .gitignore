@@ -45,6 +45,9 @@
 #IDE files
 .idea/*
 
+#Test result file
+build/result/*
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
