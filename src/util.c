@@ -19,6 +19,10 @@ char* readline() {
 
     char* data = malloc(alloc_length);
 
+    if (stdin == NULL){
+        return NULL;
+    }
+
     while (true) {
         char* cursor = data + data_length;
         char* line = fgets(cursor, alloc_length - data_length, stdin);
@@ -38,7 +42,7 @@ char* readline() {
         data = realloc(data, alloc_length);
 
         if (!data) {
-            data = '\0';
+            data = "\0";
 
             break;
         }
@@ -50,13 +54,13 @@ char* readline() {
         data = realloc(data, data_length);
 
         if (!data) {
-            data = '\0';
+            data = "\0";
         }
     } else {
         data = realloc(data, data_length + 1);
 
         if (!data) {
-            data = '\0';
+            data = "\0";
         } else {
             data[data_length] = '\0';
         }

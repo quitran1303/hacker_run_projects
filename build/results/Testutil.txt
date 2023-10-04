@@ -1,5 +1,8 @@
-test/Testutil.c:52:test_readline_with_valid_input:PASS
+test/Testutil.c:87:test_readline_with_valid_input:PASS
+test/Testutil.c:88:test_readline_with_null_input:PASS
+result =  
+test/Testutil.c:89:test_readline_with_empty_input:PASS
 
 -----------------------
-1 Tests 0 Failures 0 Ignored 
+3 Tests 0 Failures 0 Ignored 
 OK
