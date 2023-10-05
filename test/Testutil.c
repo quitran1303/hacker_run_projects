@@ -82,7 +82,6 @@ void test_readline_with_empty_input(void) {
 }
 
 //char* ltrim(char* str);
-
 void test_ltrim_with_valid_input(void){
     char* string_with_left_spaces = "   abc";
     char* result = ltrim(string_with_left_spaces);
@@ -123,6 +122,47 @@ void test_ltrim_with_empty_string(void){
     TEST_ASSERT_EQUAL_STRING("", result);
 }
 
+//RTRIM() testcases - char* rtrim(char* str);
+void test_rtrim_with_empty_string(void){
+    char* string_empty = "";
+    char* result = rtrim(string_empty);
+
+    //Not null and empry
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("", result);
+}
+
+void test_rtrim_with_right_spaces(void){
+    char* string_with_spaces = "Hello World   ";
+    char* result = rtrim(string_with_spaces);
+
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("Hello World", result);
+}
+
+void test_rtrim_with_all_spaces(void){
+    char* string_with_all_spaces = "       ";
+    char* result = rtrim(string_with_all_spaces);
+
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("", result);
+}
+
+void test_rtrim_with_null(void){
+    char* string_null = NULL;
+    char* result = rtrim(string_null);
+
+    TEST_ASSERT_NULL(result);
+}
+
+void test_rtrim_with_no_spaces(void){
+    char* string_no_spaces = "Hello John";
+    char* result = rtrim(string_no_spaces);
+
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("Hello John", result);
+}
+
 int main(void) {
     UNITY_BEGIN();
 
@@ -137,6 +177,13 @@ int main(void) {
     RUN_TEST(test_ltrim_with_all_spaces);
     RUN_TEST(test_ltrim_with_no_spaces);
     RUN_TEST(test_ltrim_with_empty_string);
+
+    //Run the testcases for rtrim (right trim spaces)
+    RUN_TEST(test_rtrim_with_empty_string);
+    RUN_TEST(test_rtrim_with_right_spaces);
+    RUN_TEST(test_rtrim_with_all_spaces);
+    RUN_TEST(test_rtrim_with_null);
+    RUN_TEST(test_rtrim_with_no_spaces);
 
     return UNITY_END();
 }

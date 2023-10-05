@@ -71,7 +71,7 @@ char* readline() {
 
 char* ltrim(char* str){
     if (!str){
-        return '\0';
+        return NULL;
     }
 
     if (!*str){
@@ -83,4 +83,24 @@ char* ltrim(char* str){
     }
 
     return str;
+}
+
+char* rtrim(char* str){
+    if(!str){
+        return NULL;
+    }
+
+    if (!*str){
+        return str;
+    }
+
+    //Get pointer to end character
+    int len = strlen(str);
+
+    //Trace back the space and calculate the len of return value
+    while(isspace(str[len - 1])){
+        len--;
+    }
+    char* result = strndup(str,len);
+    return result;
 }
