@@ -10,4 +10,5 @@ char* right_trim(char* str);
 char** split_string(char* str);
 bool parse_int(char* str, int* result);
 int* reverse_array(int a_count, int* org_array, int* result_count);
+int hourglass_sum(int arr_rows, int arr_columns, int** arr);
 #endif //HACKER_RUN_PROJECTS_UTIL_H

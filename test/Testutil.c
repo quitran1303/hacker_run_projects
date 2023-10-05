@@ -281,6 +281,29 @@ void test_reverse_array_with_empty_input(void){
     TEST_ASSERT_EMPTY(result);
 }
 
+// Testcases for hourglasssum
+void test_hourglass_sum_with_values(void){
+    int input_array[6][6] = {{1,1,1,1,1,1},{1,1,1,1,1,1},{1,1,1,1,1,1},{1,1,1,1,1,1},{1,1,1,1,1,1},{1,1,1,1,1,1}};
+
+    // Convert the 2D array to a pointer to pointer (int**)
+    int** arr = (int**)malloc(6 * sizeof(int*));
+    for (int i = 0; i < 6; i++) {
+        arr[i] = (int*)malloc(6 * sizeof(int));
+        for (int j = 0; j < 6; j++) {
+            arr[i][j] = input_array[i][j];
+        }
+    }
+
+    int result = hourglass_sum(6, 6, arr);
+
+    TEST_ASSERT_EQUAL_INT(7, result);
+
+    for (int i = 0; i < 6; i++){
+        free(arr[i]);
+    }
+    free(arr);
+}
+
 int main(void) {
     UNITY_BEGIN();
 
@@ -319,6 +342,9 @@ int main(void) {
     RUN_TEST(test_reverse_array_with_valid_input);
     RUN_TEST(test_reverse_array_with_null_input);
     RUN_TEST(test_reverse_array_with_empty_input);
+
+    // Run the testcases for hourglass_sum
+    RUN_TEST(test_hourglass_sum_with_values);
 
     return UNITY_END();
 }

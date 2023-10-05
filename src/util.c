@@ -174,3 +174,33 @@ int* reverse_array(int a_count, int* org_array, int* result_count){
     *result_count = a_count;
     return reversed_array;
 }
+
+/*
+ * Complete the 'hourglassSum' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+ */
+
+int hourglass_sum(int arr_rows, int arr_columns, int** arr) {
+    // Initialize a variable to store the maximum hourglass sum
+    int max_sum = -63; // Minimum possible hourglass sum is -9 * 7 = -63
+
+    // Iterate through the 2D array to find hourglass sums
+    for (int i = 0; i < (arr_rows - 2); i++) {
+        for (int j = 0; j < (arr_columns - 2); j++) {
+            // Calculate the hourglass sum for the current position
+            int sum = arr[i][j] + arr[i][j + 1] + arr[i][j + 2] +
+                      arr[i + 1][j + 1] +
+                      arr[i + 2][j] + arr[i + 2][j + 1] + arr[i + 2][j + 2];
+
+            // Update the maximum sum if the current sum is greater
+            if (sum > max_sum) {
+                max_sum = sum;
+            }
+        }
+    }
+
+    return max_sum;
+}
+
