@@ -4,9 +4,10 @@
 
 #ifndef HACKER_RUN_PROJECTS_UTIL_H
 #define HACKER_RUN_PROJECTS_UTIL_H
-char* readline();
-char* ltrim(char*);
-char* rtrim(char*);
-char** split_string(char*);
-int parse_int(char*);
+char* read_line();
+char* left_trim(char* str);
+char* right_trim(char* str);
+char** split_string(char* str);
+bool parse_int(char* str, int* result);
+int* reverse_array(int a_count, int* org_array, int* result_count);
 #endif //HACKER_RUN_PROJECTS_UTIL_H

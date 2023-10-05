@@ -13,7 +13,7 @@
 #include <string.h>
 #include "util.h"
 
-char* readline() {
+char* read_line() {
     size_t alloc_length = 1024;
     size_t data_length = 0;
 
@@ -69,7 +69,7 @@ char* readline() {
     return data;
 }
 
-char* ltrim(char* str){
+char* left_trim(char* str){
     if (!str){
         return NULL;
     }
@@ -85,7 +85,10 @@ char* ltrim(char* str){
     return str;
 }
 
-char* rtrim(char* str){
+/*
+ *
+ * */
+char* right_trim(char* str){
     if(!str){
         return NULL;
     }
@@ -103,4 +106,71 @@ char* rtrim(char* str){
     }
     char* result = strndup(str,len);
     return result;
+}
+
+/*
+ *
+ * */
+char** split_string(char* str) {
+    char** splits = NULL;
+
+    if(str == NULL){
+        return NULL;
+    }
+
+    // Duplicate the input string since strtok modifies it
+    char* input_copy = strdup(str);
+    if (input_copy == NULL) {
+        return NULL; // Memory allocation failed
+    }
+
+    // Count the number of tokens (substrings)
+    int spaces = 1;
+    char* token = strtok(input_copy, " ");
+    while (token != NULL) {
+        spaces++;
+        token = strtok(NULL, " ");
+    }
+
+    //Allocate memory
+    splits = (char**) malloc(spaces * sizeof(char*));
+
+    //Reset input_copy and tokenize again
+    strcpy(input_copy, str);
+    int token_index = 0;
+    token = strtok(input_copy, " ");
+    while(token != NULL){
+        splits[token_index] = strdup(token);
+        token_index++;
+        token = strtok(NULL, " ");
+    }
+    return splits;
+}
+
+bool parse_int(char* str, int* result){
+    char* endptr;
+    *result = (int) strtol(str, &endptr, 10);
+    if (*endptr != '\0'){
+        return false;
+    }
+    return true;
+}
+
+int* reverse_array(int a_count, int* org_array, int* result_count){
+    if (org_array == NULL){
+        *result_count = 0;
+        return NULL;
+    }
+    int* reversed_array = (int*) malloc(a_count * sizeof (int));
+    if(reversed_array == NULL){
+        *result_count = 0;
+        return NULL;
+    }
+
+    for (int i = 0; i < a_count; i++){
+        reversed_array[i] = org_array[a_count - 1 - i];
+    }
+
+    *result_count = a_count;
+    return reversed_array;
 }
