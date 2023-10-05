@@ -91,6 +91,38 @@ void test_ltrim_with_valid_input(void){
     TEST_ASSERT_EQUAL_STRING("abc", result);
 }
 
+void test_ltrim_with_null_input(void){
+    char* string_null = NULL;
+    char* result = ltrim(string_null);
+
+    TEST_ASSERT_NULL(result);
+}
+
+void test_ltrim_with_all_spaces(void){
+    char* string_all_spaces = "     ";
+    char* result = ltrim(string_all_spaces);
+
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EMPTY(result);
+}
+
+void test_ltrim_with_no_spaces(void){
+    char* string_no_spaces = "Hello World";
+    char* result = ltrim(string_no_spaces);
+
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("Hello World", result);
+
+}
+
+void test_ltrim_with_empty_string(void){
+    char* string_empty = "";
+    char* result = ltrim(string_empty);
+
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("", result);
+}
+
 int main(void) {
     UNITY_BEGIN();
 
@@ -101,6 +133,10 @@ int main(void) {
 
     // Run the testcases for ltrim (left trim spaces)
     RUN_TEST(test_ltrim_with_valid_input);
+    RUN_TEST(test_ltrim_with_null_input);
+    RUN_TEST(test_ltrim_with_all_spaces);
+    RUN_TEST(test_ltrim_with_no_spaces);
+    RUN_TEST(test_ltrim_with_empty_string);
 
     return UNITY_END();
 }
