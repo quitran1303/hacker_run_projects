@@ -1,3 +1,4 @@
+# Created by Qui Tran on 10/5/23.
 #Determin host type, set commands and target extension for different environment (Windows, Unix)
 ifeq ($(OS),Windows_NT)
   ifeq ($(shell uname -s),)
@@ -13,11 +14,6 @@ else #Unix base
 	MKDIR = mkdir -p
 	TARGET_EXTENSION=out
 endif
-
-.PHONY: clean
-.PHONY: test
-.PHONY: compile
-.PHONY: install
 
 #Define paths
 PATH_UNITY = test/unity/src/
@@ -51,7 +47,7 @@ LAST_LINES = `tail -n 3 $(PATH_RESULTS)*.txt`
 #make
 all: test compile install
 
-#make test
+# make test, summary the testcases into three groups
 test: $(BUILD_PATHS) $(RESULTS)
 	@echo "-----------------------\nIGNORES:\n-----------------------"
 	@echo "$(IGNORE)"
@@ -61,6 +57,7 @@ test: $(BUILD_PATHS) $(RESULTS)
 	@echo "$(PASSED)"
 	@echo "$(LAST_LINES)"
 
+# Execute the test file and put the log into equivalent log files
 $(PATH_RESULTS)%.txt: $(PATH_BUILD)%.$(TARGET_EXTENSION)
 	-./$< > $@ 2>&1
 
@@ -108,6 +105,11 @@ clean:
 	$(CLEANUP) $(PATH_BUILD)*.$(TARGET_EXTENSION)
 	$(CLEANUP) $(PATH_RESULTS)*.txt
 	$(CLEANUP) $(EXECUTE_NAME).$(TARGET_EXTENSION)
+
+.PHONY: clean
+.PHONY: test
+.PHONY: compile
+.PHONY: install
 
 .PRECIOUS: $(PATH_BUILD)Test%.$(TARGET_EXTENSION)
 .PRECIOUS: $(PATH_DEPENDS)%.d
