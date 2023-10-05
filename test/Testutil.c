@@ -81,13 +81,26 @@ void test_readline_with_empty_input(void) {
     remove("fake_stdin.txt");
 }
 
+//char* ltrim(char* str);
+
+void test_ltrim_with_valid_input(void){
+    char* string_with_left_spaces = "   abc";
+    char* result = ltrim(string_with_left_spaces);
+
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("abc", result);
+}
+
 int main(void) {
     UNITY_BEGIN();
 
-    // Run the test case
+    // Run the test case for function readline
     RUN_TEST(test_readline_with_valid_input);
     RUN_TEST(test_readline_with_null_input);
     RUN_TEST(test_readline_with_empty_input);
+
+    // Run the testcases for ltrim (left trim spaces)
+    RUN_TEST(test_ltrim_with_valid_input);
 
     return UNITY_END();
 }
